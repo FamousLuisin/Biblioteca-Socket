@@ -56,12 +56,11 @@ public class ClientHandler extends Thread{
             String escolha;
 
             do{
-                this.out.writeObject("Escolha a opção:");
+                this.out.writeObject("Escolha a opção ou digite SAIR!");
                 this.out.writeObject("(1) listar");
                 this.out.writeObject("(2) registrar");
                 this.out.writeObject("(3) alugar");
                 this.out.writeObject("(4) devolver");
-                this.out.writeObject("sair");
 
                 escolha = (String) this.in.readObject();
 
@@ -78,10 +77,13 @@ public class ClientHandler extends Thread{
                     case "devolvel": case "4":
                         this.bookManager.check_in_book(this);
                         break;
-                    case "sair":
+                    case "SAIR!":
+                        break;
+                    default:
+                        this.out.writeObject("Opção inválida");
                         break;
                 }
-            } while (!escolha.equals("sair"));
+            } while (!escolha.equals("SAIR!"));
 
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);

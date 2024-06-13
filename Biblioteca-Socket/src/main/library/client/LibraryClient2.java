@@ -38,7 +38,7 @@ public class LibraryClient2 {
             readerThread.start();
 
             String string = "";
-            while (!string.equals("0")) {
+            while (!string.equals("SAIR!")) {
                 string = SCANNER.nextLine();
                 out.writeObject(string);
             }

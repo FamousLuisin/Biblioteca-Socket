@@ -1,6 +1,7 @@
 package main.library.server;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonWriter;
@@ -8,7 +9,7 @@ import com.google.gson.stream.JsonWriter;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 public class BookManager {
@@ -16,13 +17,11 @@ public class BookManager {
     private final String JSON;
     private final Gson gson;
     private final List<Book> books;
-    private final Scanner scanner;
 
     public BookManager(String JSON) {
         this.JSON = JSON;
-        this.gson = new Gson();
+        this.gson = new GsonBuilder().setPrettyPrinting().create();
         this.books = new ArrayList<>();
-        this.scanner = new Scanner(System.in);
 
         this.json_to_book_list();
     }
@@ -45,11 +44,13 @@ public class BookManager {
 
     private void book_list_to_json(){
         JsonArray json_books = new JsonArray();
-        try(JsonWriter jw = new JsonWriter(new FileWriter(JSON))) {
-            this.books.forEach(element -> json_books.add(gson.toJsonTree(element)));
+        this.books.forEach(element -> json_books.add(gson.toJsonTree(element)));
 
-            JsonObject update = new JsonObject();
-            update.add("livros", json_books);
+        JsonObject update = new JsonObject();
+        update.add("livros", json_books);
+
+        try(JsonWriter jw = new JsonWriter(new FileWriter(JSON))) {
+            jw.setIndent("  ");
             gson.toJson(update, jw);
 
         } catch (IOException e) {
@@ -58,9 +59,11 @@ public class BookManager {
     }
 
     public void list_books(ClientHandler client){
+        AtomicInteger index = new AtomicInteger();
+
         Consumer<Book> consumer = element -> {
             try {
-                client.getOut().writeObject(element.toString());
+                client.getOut().writeObject("(" + index.getAndIncrement() + ") " + element.toString());
                 client.getOut().flush();
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -70,7 +73,7 @@ public class BookManager {
         books.forEach(consumer);
     }
 
-    public void register_book(ClientHandler client){
+    public void register_book(ClientHandler client) throws IOException {
         try {
             client.getOut().writeObject("Nome do livro: ");
             client.getOut().flush();
@@ -91,12 +94,16 @@ public class BookManager {
             Book newBook = new Book(book_name, book_author, book_genre, book_copies);
             this.books.add(newBook);
 
-        } catch (IOException | ClassNotFoundException e) {
+            this.book_list_to_json();
+
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
+        } catch (NumberFormatException e){
+            client.getOut().writeObject("Digite um valor valido para os exemplares");
         }
     }
 
-    public void check_out_book(ClientHandler client){
+    public void check_out_book(ClientHandler client) throws IOException {
         this.list_books(client);
 
         try {
@@ -108,15 +115,18 @@ public class BookManager {
 
             if (book.getExemplares() != 0){
                 book.reserve();
+                this.book_list_to_json();
             } else{
                 client.getOut().writeObject("Livro escolhido não possui exemplares disponiveis");
             }
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
+        } catch (NumberFormatException | IndexOutOfBoundsException e){
+            client.getOut().writeObject("Operação inválida: Digite um index valido");
         }
     }
 
-    public void check_in_book(ClientHandler client){
+    public void check_in_book(ClientHandler client) throws IOException{
         this.list_books(client);
 
         try {
@@ -127,13 +137,11 @@ public class BookManager {
 
             Book book = this.books.get(index);
             book.refund();
-        } catch (IOException | ClassNotFoundException e) {
+            this.book_list_to_json();
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
+        } catch (NumberFormatException | IndexOutOfBoundsException e){
+            client.getOut().writeObject("Operação inválida: Digite um index valido");
         }
-    }
-
-    public void end_transaction(){
-        this.book_list_to_json();
-        this.scanner.close();
     }
 }

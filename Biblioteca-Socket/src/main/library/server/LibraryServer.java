@@ -38,8 +38,6 @@ public class LibraryServer {
                     if (running){
                         throw new RuntimeException(e);
                     }
-                } finally {
-                    bookManager.end_transaction();
                 }
             });
 
@@ -53,15 +51,5 @@ public class LibraryServer {
 
     public static void removeClient(ClientHandler clientHandler){
         clients.remove(clientHandler);
-
-        if (clients.isEmpty()) {
-            running = false;
-
-            try {
-                new Socket("127.0.0.1", PORT).close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 }

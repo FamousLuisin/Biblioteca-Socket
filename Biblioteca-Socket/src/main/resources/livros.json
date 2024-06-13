@@ -1,1 +1,100 @@
-{"livros":[{"titulo":"Meditações","autor":"Marco Aurélio","genero":"Filosofia","exemplares":4},{"titulo":"Orgulho e Preconceito","autor":"Jane Austen","genero":"Romance","exemplares":4},{"titulo":"Nada Pode Me Ferir","autor":"David Goggins","genero":"Autoajuda","exemplares":2},{"titulo":"O Homem Invisível","autor":"H.G. Wells","genero":"Ficção Científica","exemplares":1},{"titulo":"Utopia","autor":"Thomas More","genero":"Filosofia","exemplares":14},{"titulo":"A Revolução dos Bichos","autor":"George Orwell","genero":"Fábula Política","exemplares":1},{"titulo":"As Crônicas de Nárnia","autor":"C.S. Lewis","genero":"Fantasia","exemplares":8},{"titulo":"Cartas Chilenas","autor":"Tomás Antônio Gonzaga","genero":"Sátira","exemplares":3},{"titulo":"O Príncipe","autor":"Nicolau Maquiavel","genero":"Filosofia Política","exemplares":1},{"titulo":"O Guia do Mochileiro das Galáxias","autor":"Douglas Adams","genero":"Ficção Científica","exemplares":10},{"titulo":"One Piece","autor":"Echiro Oda","genero":"Mangá","exemplares":19}]}
+{
+  "livros": [
+    {
+      "titulo": "Meditações",
+      "autor": "Marco Aurélio",
+      "genero": "Filosofia",
+      "exemplares": 4
+    },
+    {
+      "titulo": "Orgulho e Preconceito",
+      "autor": "Jane Austen",
+      "genero": "Romance",
+      "exemplares": 4
+    },
+    {
+      "titulo": "Nada Pode Me Ferir",
+      "autor": "David Goggins",
+      "genero": "Autoajuda",
+      "exemplares": 2
+    },
+    {
+      "titulo": "O Homem Invisível",
+      "autor": "H.G. Wells",
+      "genero": "Ficção Científica",
+      "exemplares": 1
+    },
+    {
+      "titulo": "Utopia",
+      "autor": "Thomas More",
+      "genero": "Filosofia",
+      "exemplares": 14
+    },
+    {
+      "titulo": "A Revolução dos Bichos",
+      "autor": "George Orwell",
+      "genero": "Fábula Política",
+      "exemplares": 1
+    },
+    {
+      "titulo": "As Crônicas de Nárnia",
+      "autor": "C.S. Lewis",
+      "genero": "Fantasia",
+      "exemplares": 8
+    },
+    {
+      "titulo": "Cartas Chilenas",
+      "autor": "Tomás Antônio Gonzaga",
+      "genero": "Sátira",
+      "exemplares": 3
+    },
+    {
+      "titulo": "O Príncipe",
+      "autor": "Nicolau Maquiavel",
+      "genero": "Filosofia Política",
+      "exemplares": 1
+    },
+    {
+      "titulo": "O Guia do Mochileiro das Galáxias",
+      "autor": "Douglas Adams",
+      "genero": "Ficção Científica",
+      "exemplares": 10
+    },
+    {
+      "titulo": "One Piece",
+      "autor": "Echiro Oda",
+      "genero": "Mangá",
+      "exemplares": 19
+    },
+    {
+      "titulo": "Jujutsu ",
+      "autor": "Gege",
+      "genero": "Fantasia",
+      "exemplares": 10
+    },
+    {
+      "titulo": "O principe",
+      "autor": "Maquiavel",
+      "genero": "Filosofia",
+      "exemplares": 16
+    },
+    {
+      "titulo": "Coraline",
+      "autor": "Neil Gaiman",
+      "genero": "Fantasia",
+      "exemplares": 14
+    },
+    {
+      "titulo": "Carmila",
+      "autor": "Sheridan Le Fanu",
+      "genero": "Romance",
+      "exemplares": 3
+    },
+    {
+      "titulo": "Alice no país da Maravilhas",
+      "autor": "Lewis Carroll",
+      "genero": "nonsense",
+      "exemplares": 7
+    }
+  ]
+}
