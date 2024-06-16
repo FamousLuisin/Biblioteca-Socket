@@ -107,7 +107,7 @@ public class BookManager {
         this.list_books(client);
 
         try {
-            client.getOut().writeObject("Qual livro deseja alugar?: ");
+            client.getOut().writeObject("Qual livro deseja alugar (Use o Index)?: ");
             client.getOut().flush();
             Integer index = Integer.parseInt((String) client.getIn().readObject());
 
@@ -115,6 +115,7 @@ public class BookManager {
 
             if (book.getExemplares() != 0){
                 book.reserve();
+                client.getOut().writeObject("Livro alugado: " + book.getTitulo());
                 this.book_list_to_json();
             } else{
                 client.getOut().writeObject("Livro escolhido não possui exemplares disponiveis");
@@ -130,13 +131,14 @@ public class BookManager {
         this.list_books(client);
 
         try {
-            client.getOut().writeObject("Qual livro deseja devolver?: ");
+            client.getOut().writeObject("Qual livro deseja devolver (Use o Index)?: ");
             client.getOut().flush();
             Integer index = Integer.parseInt((String) client.getIn().readObject());
 
 
             Book book = this.books.get(index);
             book.refund();
+            client.getOut().writeObject("Livro devolvido: " + book.getTitulo());
             this.book_list_to_json();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);

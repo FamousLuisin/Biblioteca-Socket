@@ -32,4 +32,8 @@ public class Book {
     public Integer getExemplares(){
         return this.exemplares.get();
     }
+
+    public String getTitulo(){
+        return this.titulo;
+    }
 }

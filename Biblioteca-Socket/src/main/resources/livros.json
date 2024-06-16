@@ -94,7 +94,13 @@
       "titulo": "Alice no país da Maravilhas",
       "autor": "Lewis Carroll",
       "genero": "nonsense",
-      "exemplares": 7
+      "exemplares": 6
+    },
+    {
+      "titulo": "Frankenstein",
+      "autor": "Mary Shelley",
+      "genero": "Romance",
+      "exemplares": 10
     }
   ]
 }
