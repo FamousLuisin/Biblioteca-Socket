@@ -83,7 +83,7 @@ public class ClientHandler extends Thread{
                         this.out.writeObject("Opção inválida");
                         break;
                 }
-            } while (!escolha.equals("SAIR!"));
+            } while (!escolha.equalsIgnoreCase("sair"));
 
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
