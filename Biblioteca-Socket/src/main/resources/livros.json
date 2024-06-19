@@ -101,6 +101,12 @@
       "autor": "Mary Shelley",
       "genero": "Romance",
       "exemplares": 10
+    },
+    {
+      "titulo": "A arte da guerra",
+      "autor": "Sun Tzu",
+      "genero": "Filosofia",
+      "exemplares": 15
     }
   ]
 }

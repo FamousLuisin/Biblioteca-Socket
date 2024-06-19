@@ -10,13 +10,13 @@ import java.util.List;
 public class LibraryServer {
 
     private static final Integer PORT = 8080;
-    private static final String JSON = "src"+ File.separator + "main"+ File.separator + "resources" + File.separator + "livros.json";
+    private static final String JSON = System.getProperty("user.dir") + File.separator + "Biblioteca-Socket" + File.separator + "src" + File.separator + "main"+ File.separator + "resources" + File.separator + "livros.json";
     private static final List<ClientHandler> clients = new ArrayList<>();
     private static volatile boolean running = true;
 
     public static void main(String[] args) {
         try(ServerSocket serverLibrary = new ServerSocket(PORT)) {
-
+        	System.out.println(JSON);
             System.out.println("Server inicializado");
             BookManager bookManager = new BookManager(JSON);
 
